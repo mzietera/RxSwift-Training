@@ -7,6 +7,7 @@ target 'RxSwiftTraining' do
 
   # Pods for RxSwiftTraining
   pod 'RxSwift', '~> 4.1.1'
+  pod 'RxCocoa', '~> 4.1.1'
 end
 
 target 'RxSwiftTrainingTests' do
