@@ -97,3 +97,89 @@ challenge1neverObservable.subscribe(
         print("Completed")
     })
     .disposed(by: disposeBag)
+
+////////////////////////////////
+print("Chapter 3 - Subjects")
+
+//PublishSubject
+let subject = PublishSubject<String>()
+subject.onNext("is anyone listening?")
+
+let subscriptionOne = subject.subscribe(
+    onNext: { print($0) })
+subject.onNext("1")
+
+let subscriptionTwo = subject.subscribe { (event) in
+    print("2)", event.element ?? event)
+}
+subject.onNext("3")
+subscriptionOne.dispose()
+subject.onNext("4")
+
+subject.onCompleted()
+subject.onNext("5")
+subscriptionTwo.dispose()
+
+subject.subscribe({
+    print("3)", $0.element ?? $0)
+    })
+    .disposed(by: disposeBag)
+
+
+//BehaviorSubject
+func print<T: CustomStringConvertible>(label: String, event: Event<T>) {
+    print(label, event.element ?? event.error ?? event)
+}
+
+let behaviorSubject = BehaviorSubject(value: "Initial value")
+
+behaviorSubject.subscribe({
+        print(label: "1)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+
+//ReplaySubject
+
+let replaySubject = ReplaySubject<String>.create(bufferSize: 2)
+replaySubject.onNext("1")
+replaySubject.onNext("2")
+replaySubject.onNext("3")
+
+replaySubject.subscribe({
+        print(label: "1)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+replaySubject.subscribe({
+        print(label: "2)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+replaySubject.onNext("4")
+replaySubject.onError(MyError.anError)
+replaySubject.dispose()
+replaySubject.subscribe({
+        print(label: "3)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+
+//Variables
+
+var variable = Variable("Initial value")
+
+variable.value = "new initial value"
+variable.asObservable().subscribe({
+        print(label: "1)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+variable.value = "1"
+
+variable.asObservable().subscribe({
+        print(label: "2)", event: $0)
+    })
+    .disposed(by: disposeBag)
+
+variable.value = "2"
