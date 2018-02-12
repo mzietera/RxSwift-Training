@@ -16,6 +16,8 @@
 		70BF04492011FB9700F09704 /* RxSwiftTrainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BF04482011FB9700F09704 /* RxSwiftTrainingTests.swift */; };
 		70FF6E95202D85130073017D /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FF6E94202D85130073017D /* APIController.swift */; };
 		70FF6E99202D91330073017D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FF6E98202D91330073017D /* SearchViewModel.swift */; };
+		70FF6EA02031AE440073017D /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FF6E9F2031AE440073017D /* Repository.swift */; };
+		70FF6EA42031B5900073017D /* RepositoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FF6EA32031B5900073017D /* RepositoriesResponse.swift */; };
 		AC39510E4937B9ED131C1703 /* Pods_RxSwiftTrainingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB34DEF75BDFFA51D99DAE7C /* Pods_RxSwiftTrainingTests.framework */; };
 		F034C46938E2BD5600E33CA8 /* Pods_RxSwiftTraining.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D914AAAB4078884CFCC1F6C1 /* Pods_RxSwiftTraining.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		70BF044A2011FB9700F09704 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70FF6E94202D85130073017D /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		70FF6E98202D91330073017D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		70FF6E9F2031AE440073017D /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		70FF6EA32031B5900073017D /* RepositoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResponse.swift; sourceTree = "<group>"; };
 		8EF68B43D4FD563CFF382CD1 /* Pods-RxSwiftTrainingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftTrainingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftTrainingTests/Pods-RxSwiftTrainingTests.release.xcconfig"; sourceTree = "<group>"; };
 		D914AAAB4078884CFCC1F6C1 /* Pods_RxSwiftTraining.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwiftTraining.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE1E2A141739CEAD1E19691B /* Pods-RxSwiftTrainingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwiftTrainingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSwiftTrainingTests/Pods-RxSwiftTrainingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		70BF04322011FB9700F09704 /* RxSwiftTraining */ = {
 			isa = PBXGroup;
 			children = (
+				70FF6EA12031AE490073017D /* Models */,
 				70FF6E96202D90EA0073017D /* ViewModels */,
 				70FF6E93202D84E80073017D /* Networking */,
 				7002CA28201F451900BCB6B7 /* Extensions */,
@@ -148,6 +153,7 @@
 		70FF6E93202D84E80073017D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				70FF6EA22031B56C0073017D /* Requests */,
 				70FF6E94202D85130073017D /* APIController.swift */,
 			);
 			path = Networking;
@@ -159,6 +165,22 @@
 				70FF6E98202D91330073017D /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		70FF6EA12031AE490073017D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				70FF6E9F2031AE440073017D /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		70FF6EA22031B56C0073017D /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				70FF6EA32031B5900073017D /* RepositoriesResponse.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,8 +399,10 @@
 				70FF6E95202D85130073017D /* APIController.swift in Sources */,
 				70FF6E99202D91330073017D /* SearchViewModel.swift in Sources */,
 				7002CA2A201F456200BCB6B7 /* ViewController+Alert.swift in Sources */,
+				70FF6EA42031B5900073017D /* RepositoriesResponse.swift in Sources */,
 				70BF04362011FB9700F09704 /* ViewController.swift in Sources */,
 				70BF04342011FB9700F09704 /* AppDelegate.swift in Sources */,
+				70FF6EA02031AE440073017D /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

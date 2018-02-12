@@ -9,14 +9,45 @@
 import Foundation
 import RxSwift
 
+enum APIError: Error {
+    case parsingError(Error)
+    case connectionError(Error)
+}
+
 internal final class APIController {
-    func fetchResults(`for` searchPhrase: String) -> Observable<Any?> {
-        let url = URL(string: "https://api.github.com/search/repositories?q=tetris")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        return URLSession.shared.rx.data(request: request).map { (data) -> Any in
-            let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            return json
-        }
+    private let session: URLSession
+
+    init() {
+        self.session = URLSession.shared
+    }
+
+    func fetchResults(`for` searchPhrase: String) -> Observable<RepositoriesResponse> {
+        return Observable.create({ [weak self] (observer) -> Disposable in
+            var urlComponents = URLComponents(string: "https://api.github.com/search/repositories")!
+            let queryItem = URLQueryItem(name: "q", value: searchPhrase)
+            urlComponents.queryItems = [queryItem]
+            let url = urlComponents.url!
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            let task = self?.session.dataTask(with: request, completionHandler: { (data, response, error) in
+
+                if let error = error {
+                    observer.onError(APIError.connectionError(error))
+                }
+                
+                do {
+                    let response = try JSONDecoder().decode(RepositoriesResponse.self, from: data!)
+                    observer.onNext(response)
+                    observer.onCompleted()
+                } catch {
+                    observer.onError(APIError.parsingError(error))
+                    return
+                }
+            })
+
+            task?.resume()
+            return Disposables.create()
+        })
     }
 }
