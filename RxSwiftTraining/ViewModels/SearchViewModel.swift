@@ -9,22 +9,31 @@
 import Foundation
 import RxSwift
 
-internal struct SearchViewModel {
+internal final class SearchViewModel {
     let searchPhrase = Variable<String>("")
+    let repositoriesList = Variable<[Repository]>([])
 
     let apiController = APIController()
     let disposeBag = DisposeBag()
+
+    init() {
+        setupBindings()
+    }
 
     func didTapSearchButton() {
         print(searchPhrase.value)
         apiController.fetchResults(for: searchPhrase.value)
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { response in
-                    print(response)
-                }, onError: { error in
-                    print(error)
+            .subscribe(onNext: { [weak self] response in
+                    self?.repositoriesList.value = response.repositories
+                }, onError: { [weak self] error in
+                    self?.repositoriesList.value.removeAll()
             })
             .disposed(by: disposeBag)
+
+    }
+
+    func setupBindings() {
 
     }
 }

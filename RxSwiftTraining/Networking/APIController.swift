@@ -34,6 +34,7 @@ internal final class APIController {
 
                 if let error = error {
                     observer.onError(APIError.connectionError(error))
+                    return
                 }
                 
                 do {

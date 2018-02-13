@@ -12,6 +12,8 @@ import RxCocoa
 
 internal final class ViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+
     private let searchController = UISearchController(searchResultsController: nil)
     private let disposeBag = DisposeBag()
     private let viewModel = SearchViewModel()
@@ -20,7 +22,8 @@ internal final class ViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
-
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for repositories"
         setupBindings()
     }
 
@@ -34,6 +37,13 @@ internal final class ViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.didTapSearchButton()
             })
+            .disposed(by: disposeBag)
+
+        viewModel.repositoriesList.asObservable()
+            .bind(to: tableView.rx.items(cellIdentifier: "RepositoryCell")) { index, model, cell in
+                cell.textLabel?.text = model.name
+                cell.detailTextLabel?.text = model.ownerLogin
+            }
             .disposed(by: disposeBag)
     }
 }
