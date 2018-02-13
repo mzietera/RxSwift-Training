@@ -30,10 +30,5 @@ internal final class SearchViewModel {
                     self?.repositoriesList.value.removeAll()
             })
             .disposed(by: disposeBag)
-
-    }
-
-    func setupBindings() {
-
     }
 }
