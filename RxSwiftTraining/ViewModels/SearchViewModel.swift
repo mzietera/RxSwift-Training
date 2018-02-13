@@ -16,10 +16,6 @@ internal final class SearchViewModel {
     let apiController = APIController()
     let disposeBag = DisposeBag()
 
-    init() {
-        setupBindings()
-    }
-
     func didTapSearchButton() {
         print(searchPhrase.value)
         apiController.fetchResults(for: searchPhrase.value)
