@@ -30,4 +30,4 @@ Getting familiar with basics of RxSwift
 	bundle exec pod install
 	```
 	
-4. Open `RecorderApp.xcworkspace` file and build the project.
+4. Open `RxSwiftTraining.xcworkspace` file and build the project.
